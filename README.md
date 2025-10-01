@@ -1,85 +1,51 @@
-# Quan_ly_project – Tổng quan dự án (.NET MAUI + SQLite)
+## PHIẾU TỰ ĐÁNH GIÁ BÀI TẬP: ỨNG DỤNG TODO LIST
 
-## Kiến trúc & Công nghệ
-- **UI**: .NET MAUI (XAML + code-behind), đa nền tảng: Android, iOS, MacCatalyst, Windows
-- **DI/Khởi tạo**: `MauiProgram.CreateMauiApp()` đăng ký ViewModel/Service qua DI container
-- **Điều hướng**: `App.xaml` khai báo `Shell` (Login, Register, Home); `App.xaml.cs` đặt `MainPage` là `NavigationPage(LoginPage)`
-- **Dữ liệu**: SQLite cục bộ với `sqlite-net-pcl`
-- **Layering**:
-  - Models: `User`, `Project`, `ProjectTask`, `ProjectMember`
-  - Data (Repositories): CRUD qua `SQLiteConnection` tạo bởi `DatabaseHelper`
-  - Services: `AuthService`, `PermissionService`
-  - ViewModels: logic trình bày (đăng ký trong DI)
-  - Views: XAML pages (Login/Register/Home/Project/Task/ProjectMember)
+**Họ và tên:** Vũ Văn Tỉnh
 
-## Cấu trúc thư mục chính
-- `Quan_ly_project/`
-  - `App.xaml`, `App.xaml.cs`: cấu hình `Shell` và trang khởi tạo
-  - `MauiProgram.cs`: đăng ký DI cho VM/Services
-  - `Models/`: thực thể database
-  - `Data/`: lớp truy cập dữ liệu (Repository) + `DatabaseHelper`
-  - `Services/`: dịch vụ domain (Auth, Permission)
-  - `ViewModels/`: lớp ViewModel tương ứng các màn hình
-  - `Views/`: XAML pages + code-behind
-  - `Resources/`: fonts, images, styles, splash, app icon
-  - `Platforms/`: entrypoint và cấu hình từng nền tảng
-  - `Quan_ly_project.csproj`: cấu hình target frameworks, packages
+**Mã số sinh viên:** 2221050517
 
-## Dòng chảy ứng dụng (High-level)
-1. Ứng dụng khởi tạo qua `MauiProgram.CreateMauiApp()` → cấu hình fonts, DI.
-2. `App` khởi động, đặt `MainPage` là `NavigationPage(new LoginPage())`.
-3. Người dùng đăng nhập/đăng ký (qua `AuthService` + `UserRepository`).
-4. Sau khi đăng nhập, điều hướng đến `HomePage` và các trang quản lý Project/Task/Member.
+---
 
-## Data Layer
-- `DatabaseHelper.GetConnection()`
-  - Tạo file DB tại thư mục LocalApplicationData: `QuanLyPhanMem.db3`
-  - Bật `PRAGMA foreign_keys = ON`
-  - Tạo bảng: `User`, `Project`, `ProjectTask`, `ProjectMember`
-- Repositories:
-  - `UserRepository`: Add/GetById/GetByUsername/GetAll/Update/Delete
-  - `ProjectRepository`: Add (tránh trùng theo Name+CreatedBy), GetById/GetAll/Update/Delete
-  - `TaskRepository`: Add/GetById/GetByProjectId/Update/Delete/DeleteAll
-  - `ProjectMemberRepository`: Add/GetMembersByProjectId/Update/RemoveMember
+### Hướng dẫn:
+* Đánh dấu `[x]` vào ô checkbox tương ứng với mỗi tiêu chí bạn đã hoàn thành.
+* Trong cột "Ghi chú", bạn có thể ghi thêm bất kỳ thông tin nào muốn giảng viên chú ý (ví dụ: "Em làm phần này nhưng chưa hoàn hảo", "Em gặp khó khăn ở mục X", v.v.).
 
-## Services
-- `AuthService`
-  - Khởi tạo `UserRepository`
-  - `AuthenticateUser(username, password)`: so khớp Username/Password thuần (chưa hash)
-  - `GetUserByUsername(username)`
-  - `Logout()` placeholder
-- `PermissionService`
-  - `HasAdminAccess(role)` → true khi role == "Admin"
-  - `HasUserAccess(role)` → true khi role == "User"
+### A. Yêu cầu cơ bản (Tối đa 8 điểm)
 
-## Models (SQLite)
-- `User`: `UserId` PK, `Username`, `Password`, `FullName`, `Email`, `Role`, `CreatedAt`
-- `Project`: `ProjectId` PK, `Name`, `Description`, `StartDate`, `EndDate`, `CreatedBy`, `CreatedAt`
-- `ProjectTask`: `TaskId` PK, `ProjectId`, `Name`, `Description`, `Status`, `ProgressPercent`, `AssigneeId`, `Deadline`, `CreatedAt`
-- `ProjectMember`: `MemberId` PK, `UserName`, `Role`, `ProjectId`, `UserId`, `JoinedAt`
+| Tiêu chí | Đã hoàn thành | Ghi chú (Nếu có) |
+| :--- | :---: | :--- |
+| **1. Model & Dữ liệu (1đ)** | | |
+| Tạo `class Todo` đúng cấu trúc. | `[x]` | |
+| **2. Hiển thị danh sách (2đ)** | | |
+| Sử dụng `ListView.builder` để hiển thị. | `[x]` | |
+| **3. Tương tác & Cập nhật trạng thái (3đ)** | | |
+| Mỗi item có `Checkbox`. | `[x]` | |
+| Nhấn `Checkbox` cập nhật đúng trạng thái (`setState`). | `[x]` | |
+| Có hiệu ứng gạch ngang khi công việc hoàn thành. | `[x]` | |
+| **4. Thêm công việc mới (2đ)** | | |
+| Có `FloatingActionButton` (FAB). | `[x]` | |
+| Nhấn FAB hiển thị `AlertDialog` với `TextField`. | `[x]` | |
+| Thêm được công việc mới vào danh sách từ dialog. | `[x]` | |
 
-## Views & Navigation
-- `App.xaml` Shell: route `LoginPage`, `RegisterPage`, `HomePage`
-- `App.xaml.cs`: dùng `NavigationPage` để đảm bảo điều hướng stack-based từ `LoginPage`
-- Các trang khác: `ProjectPage`, `TaskPage`, `ProjectMemberPage`, `HomePage2`
+### B. Thử thách nâng cao (Tối đa 2 điểm)
 
-## Cấu hình dự án
-- Target frameworks: `net9.0-android; net9.0-ios; net9.0-maccatalyst; net9.0-windows10.0.19041.0`
-- Packages: `Microsoft.Maui.Controls`, `Microsoft.Extensions.Logging.Debug`, `sqlite-net-pcl`
+| Tiêu chí | Đã hoàn thành | Ghi chú (Nếu có) |
+| :--- | :---: | :--- |
+| **Chức năng Xóa công việc (1đ)** | `[x]` | |
+| **Điều hướng sang trang Chi tiết (1đ)** | `[x]` | |
 
-## Cách chạy nhanh
-- Mở solution `Quan_ly_project.sln` bằng Visual Studio 2022+ (đã cài workload .NET MAUI)
-- Chọn target (Android Emulator, Windows, iOS/MacCatalyst nếu có môi trường)
-- Run (F5)
+### C. Điểm thưởng (Tối đa 1 điểm)
 
-## Điểm mạnh / Cần cải thiện
-- Điểm mạnh: cấu trúc rõ ràng MVVM+Repository, DB cục bộ, DI chuẩn MAUI.
-- Cần cải thiện:
-  - Bảo mật: hiện so khớp mật khẩu thuần; nên dùng hash (ví dụ BCrypt) + salt.
-  - Quan hệ khoá ngoại: hiện chưa có `[ForeignKey]`/ràng buộc ở model; cân nhắc thêm và enforce cascade.
-  - Validation: thêm kiểm tra dữ liệu ở VM/Service (rỗng, độ dài, format email,...).
-  - Navigation: hợp nhất `Shell` và `NavigationPage` cho nhất quán (ưu tiên `Shell`).
-  - Error handling & logging: thêm try/catch có xử lý hữu ích ở repository/service.
+| Tiêu chí | Đã hoàn thành | Ghi chú (Nếu có) |
+| :--- | :---: | :--- |
+| **Tổ chức Code & Sáng tạo Giao diện (1đ)** | `[ ]` | |
 
-## Liên quan
-- File hướng dẫn gốc: `README.md` (mô tả tính năng, công nghệ, cài đặt)
+---
+
+### KẾT LUẬN
+
+**Tổng điểm tự đánh giá (dự kiến):** 10 / 10
+
+**Ghi chú thêm hoặc các vấn đề gặp phải trong quá trình làm bài:**
+* ...
+* ...
