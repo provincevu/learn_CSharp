@@ -43,7 +43,7 @@
 
 ### KẾT LUẬN
 
-**Tổng điểm tự đánh giá (dự kiến):** _______ / 10
+**Tổng điểm tự đánh giá (dự kiến):** _10_ / 10
 
 **Ghi chú thêm:**
 * ...
