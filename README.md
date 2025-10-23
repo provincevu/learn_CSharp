@@ -7,45 +7,44 @@
 ---
 
 ### Hướng dẫn:
-* Đánh dấu `[x]` vào ô checkbox tương ứng với mỗi tiêu chí bạn đã hoàn thành.
-* Trong cột "Ghi chú", bạn có thể ghi thêm bất kỳ thông tin nào muốn giảng viên chú ý (ví dụ: "Em làm phần này nhưng chưa hoàn hảo", "Em gặp khó khăn ở mục X", v.v.).
+* Đánh dấu `[x]` vào ô checkbox nếu bạn đã hoàn thành.
+* Ghi chú nếu có vấn đề hoặc mở rộng thêm.
 
 ### A. Yêu cầu cơ bản (Tối đa 8 điểm)
 
-| Tiêu chí | Đã hoàn thành | Ghi chú (Nếu có) |
+| Tiêu chí | Đã hoàn thành | Ghi chú |
 | :--- | :---: | :--- |
-| **1. Model & Dữ liệu (1đ)** | | |
-| Tạo `class Todo` đúng cấu trúc. | `[x]` | |
-| **2. Hiển thị danh sách (2đ)** | | |
-| Sử dụng `ListView.builder` để hiển thị. | `[x]` | |
-| **3. Tương tác & Cập nhật trạng thái (3đ)** | | |
-| Mỗi item có `Checkbox`. | `[x]` | |
-| Nhấn `Checkbox` cập nhật đúng trạng thái (`setState`). | `[x]` | |
-| Có hiệu ứng gạch ngang khi công việc hoàn thành. | `[x]` | |
-| **4. Thêm công việc mới (2đ)** | | |
-| Có `FloatingActionButton` (FAB). | `[x]` | |
-| Nhấn FAB hiển thị `AlertDialog` với `TextField`. | `[x]` | |
-| Thêm được công việc mới vào danh sách từ dialog. | `[x]` | |
+| 1. Tạo model `Note` đúng đủ trường | [x] | |
+| 2. Hiển thị danh sách với `ListView.builder` | [x] | |
+| 3. Thêm ghi chú bằng dialog có Form + validation | [x] | |
+| 4. Xóa ghi chú hoạt động | [x] | |
+| 5. Chỉnh sửa ghi chú (mở dialog / màn hình) | [x] | |
+| 6. Lưu & tải lại bằng `shared_preferences` | [x] | |
+| 7. Hiển thị trạng thái rỗng hợp lý | [x] | |
+| 8. SnackBar khi xóa | [x] | |
 
 ### B. Thử thách nâng cao (Tối đa 2 điểm)
 
-| Tiêu chí | Đã hoàn thành | Ghi chú (Nếu có) |
+| Tiêu chí | Đã hoàn thành | Ghi chú |
 | :--- | :---: | :--- |
-| **Chức năng Xóa công việc (1đ)** | `[x]` | |
-| **Điều hướng sang trang Chi tiết (1đ)** | `[x]` | |
+| Tìm kiếm realtime | [x] | |
+| Sắp xếp danh sách | [ ] | |
+| Vuốt / long-press đánh dấu quan trọng | [ ] | |
+| Màn hình chi tiết riêng | [x] | |
+| Theme toggle | [ ] | |
 
 ### C. Điểm thưởng (Tối đa 1 điểm)
 
-| Tiêu chí | Đã hoàn thành | Ghi chú (Nếu có) |
+| Tiêu chí | Đã hoàn thành | Ghi chú |
 | :--- | :---: | :--- |
-| **Tổ chức Code & Sáng tạo Giao diện (1đ)** | `[ ]` | |
+| Tổ chức code sạch, tách file, UI sáng tạo | [x] | tổ chức code sạch và tách file |
 
 ---
 
 ### KẾT LUẬN
 
-**Tổng điểm tự đánh giá (dự kiến):** 10 / 10
+**Tổng điểm tự đánh giá (dự kiến):** _______ / 10
 
-**Ghi chú thêm hoặc các vấn đề gặp phải trong quá trình làm bài:**
+**Ghi chú thêm:**
 * ...
 * ...
